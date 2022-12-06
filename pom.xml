@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pl.britenet</groupId>
-	<artifactId>campus.spring</artifactId>
+	<artifactId>campus-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>campus.spring</name>
+	<name>campus-spring</name>
 	<description>Spring Boot project for Britenet Campus</description>
 	<properties>
 		<java.version>19</java.version>
