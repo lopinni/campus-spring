@@ -1,4 +1,4 @@
-package pl.britenet.campus.spring.Service;
+package pl.britenet.campus.spring.service;
 
 import jakarta.xml.bind.DatatypeConverter;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class AuthService {
         try {
             user = Optional.ofNullable(this.userService.findUser(
                     credentials.getUsername(),
-                    hashPasswordMD5(credentials.getPassword())
+                    hashMD5(credentials.getPassword())
             ));
             if (user.isPresent()) {
                 this.activeTokenMap.put(token, user.get().getId());
@@ -52,14 +52,14 @@ public class AuthService {
         try {
             userService.insertUser(new UserBuilder(new User())
                     .setLogin(credentials.getUsername())
-                    .setPassword(hashPasswordMD5(credentials.getPassword()))
+                    .setPassword(hashMD5(credentials.getPassword()))
                     .getUser());
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Password hash failed");
         }
     }
 
-    public String hashPasswordMD5(String password) throws NoSuchAlgorithmException {
+    public String hashMD5(String password) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         messageDigest.update(password.getBytes());
         return DatatypeConverter.printHexBinary(messageDigest.digest()).toUpperCase();
