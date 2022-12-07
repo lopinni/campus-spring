@@ -41,7 +41,7 @@ public class AuthService {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Password hash failed");
         }
-        return new LoginResponse(false, token);
+        return new LoginResponse(false, "");
     }
 
     public boolean isLoggedIn(String token) {
