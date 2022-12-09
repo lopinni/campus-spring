@@ -2,9 +2,9 @@ package pl.britenet.campus.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.britenet.campus.spring.service.AuthService;
 import pl.britenet.campus.spring.model.Credentials;
 import pl.britenet.campus.spring.model.LoginResponse;
+import pl.britenet.campus.spring.service.AuthService;
 
 @CrossOrigin
 @RestController
