@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.britenet</groupId>
 	<artifactId>campus-spring</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>campus-spring</name>
 	<description>Spring Boot project for Britenet Campus</description>
 	<properties>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>pl.britenet</groupId>
 			<artifactId>campus-api</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 
 		<dependency>

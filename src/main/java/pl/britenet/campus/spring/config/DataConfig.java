@@ -55,4 +55,9 @@ public class DataConfig {
     public UserService getUserService() {
         return new UserService(this.databaseService);
     }
+
+    @Bean
+    public ReportService getReportService() {
+        return new ReportService(this.databaseService);
+    }
 }
