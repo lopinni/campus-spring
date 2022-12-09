@@ -7,6 +7,7 @@ import pl.britenet.campusapiapp.service.ProductService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/product")
 public class ProductController {

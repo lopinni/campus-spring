@@ -7,6 +7,7 @@ import pl.britenet.campusapiapp.service.OrderService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
