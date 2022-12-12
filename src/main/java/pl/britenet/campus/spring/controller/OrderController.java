@@ -2,21 +2,23 @@ package pl.britenet.campus.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.britenet.campus.spring.service.AuthService;
 import pl.britenet.campusapiapp.model.Order;
 import pl.britenet.campusapiapp.service.OrderService;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
 
     private final OrderService orderService;
+    private final AuthService authService;
 
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, AuthService authService) {
         this.orderService = orderService;
+        this.authService = authService;
     }
 
     @GetMapping
@@ -27,6 +29,12 @@ public class OrderController {
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable int id) {
         return this.orderService.getOrder(id);
+    }
+
+    @GetMapping("/token")
+    public List<Order> getOrders(@RequestHeader("Authorization") String token) {
+        int userId = this.authService.getUserId(token);
+        return this.orderService.getByUserId(userId);
     }
 
     @PostMapping

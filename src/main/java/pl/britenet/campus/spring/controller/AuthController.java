@@ -6,7 +6,6 @@ import pl.britenet.campus.spring.model.Credentials;
 import pl.britenet.campus.spring.model.LoginResponse;
 import pl.britenet.campus.spring.service.AuthService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {

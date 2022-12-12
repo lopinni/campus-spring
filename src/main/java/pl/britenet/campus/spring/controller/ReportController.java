@@ -11,7 +11,6 @@ import pl.britenet.campusapiapp.service.ReportService;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/report")
 public class ReportController {

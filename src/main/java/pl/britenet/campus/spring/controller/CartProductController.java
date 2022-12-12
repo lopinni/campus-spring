@@ -7,7 +7,6 @@ import pl.britenet.campusapiapp.service.CartProductService;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/cartproduct")
 public class CartProductController {
