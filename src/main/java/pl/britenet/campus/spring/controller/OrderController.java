@@ -6,7 +6,9 @@ import pl.britenet.campus.spring.service.AuthService;
 import pl.britenet.campusapiapp.model.Order;
 import pl.britenet.campusapiapp.service.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -33,8 +35,12 @@ public class OrderController {
 
     @GetMapping("/token")
     public List<Order> getOrders(@RequestHeader("Authorization") String token) {
-        int userId = this.authService.getUserId(token);
-        return this.orderService.getByUserId(userId);
+        Optional<Integer> userId = this.authService.getUserId(token).describeConstable();
+        if (userId.isPresent()) {
+            return this.orderService.getByUserId(userId.get());
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @PostMapping
