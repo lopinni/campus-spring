@@ -16,12 +16,10 @@ import java.util.Optional;
 public class CartController {
 
     private final CartService cartService;
-    private final AuthService authService;
 
     @Autowired
     public CartController(CartService cartService, AuthService authService) {
         this.cartService = cartService;
-        this.authService = authService;
     }
 
     @GetMapping
@@ -32,18 +30,6 @@ public class CartController {
     @GetMapping("/{id}")
     public Cart getCart(@PathVariable int id) {
         return this.cartService.getCart(id);
-    }
-
-    @GetMapping("/token")
-    public List<Cart> getCart(@RequestHeader("Authorization") String token) {
-        int userId;
-        try {
-            userId = this.authService.getUserId(token);
-            return this.cartService.getByUserId(userId);
-        } catch (NullPointerException e) {
-            System.out.println("User has empty cart");
-            return new ArrayList<>();
-        }
     }
 
     @PostMapping

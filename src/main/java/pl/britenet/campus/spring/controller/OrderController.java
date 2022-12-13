@@ -15,12 +15,10 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderService orderService;
-    private final AuthService authService;
 
     @Autowired
     public OrderController(OrderService orderService, AuthService authService) {
         this.orderService = orderService;
-        this.authService = authService;
     }
 
     @GetMapping
@@ -31,18 +29,6 @@ public class OrderController {
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable int id) {
         return this.orderService.getOrder(id);
-    }
-
-    @GetMapping("/token")
-    public List<Order> getOrders(@RequestHeader("Authorization") String token) {
-        int userId;
-        try {
-            userId = this.authService.getUserId(token);
-            return this.orderService.getByUserId(userId);
-        } catch (NullPointerException e) {
-            System.out.println("User does not have order history");
-            return new ArrayList<>();
-        }
     }
 
     @PostMapping
