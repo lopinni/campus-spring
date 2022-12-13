@@ -35,10 +35,12 @@ public class OrderController {
 
     @GetMapping("/token")
     public List<Order> getOrders(@RequestHeader("Authorization") String token) {
-        Optional<Integer> userId = this.authService.getUserId(token).describeConstable();
-        if (userId.isPresent()) {
-            return this.orderService.getByUserId(userId.get());
-        } else {
+        int userId;
+        try {
+            userId = this.authService.getUserId(token);
+            return this.orderService.getByUserId(userId);
+        } catch (NullPointerException e) {
+            System.out.println("User does not have order history");
             return new ArrayList<>();
         }
     }

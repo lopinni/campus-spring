@@ -36,10 +36,12 @@ public class CartController {
 
     @GetMapping("/token")
     public List<Cart> getCart(@RequestHeader("Authorization") String token) {
-        Optional<Integer> userId = this.authService.getUserId(token).describeConstable();
-        if (userId.isPresent()) {
-            return this.cartService.getByUserId(userId.get());
-        } else {
+        int userId;
+        try {
+            userId = this.authService.getUserId(token);
+            return this.cartService.getByUserId(userId);
+        } catch (NullPointerException e) {
+            System.out.println("User has empty cart");
             return new ArrayList<>();
         }
     }
