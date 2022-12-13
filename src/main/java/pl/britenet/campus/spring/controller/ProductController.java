@@ -23,6 +23,11 @@ public class ProductController {
         return this.productService.getAll();
     }
 
+    @GetMapping("/category/{id}")
+    public List<Product> getByCategory(@PathVariable int id) {
+        return this.productService.getByCategory(id);
+    }
+
     @GetMapping("/{id}")
     public Product getProduct(@PathVariable int id) {
         return this.productService.getProduct(id);
