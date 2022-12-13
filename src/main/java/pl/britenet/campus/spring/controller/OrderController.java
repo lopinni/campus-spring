@@ -6,21 +6,17 @@ import pl.britenet.campus.spring.service.AuthService;
 import pl.britenet.campusapiapp.model.Order;
 import pl.britenet.campusapiapp.service.OrderService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/order")
 public class OrderController {
 
     private final OrderService orderService;
-    private final AuthService authService;
 
     @Autowired
     public OrderController(OrderService orderService, AuthService authService) {
         this.orderService = orderService;
-        this.authService = authService;
     }
 
     @GetMapping
@@ -31,18 +27,6 @@ public class OrderController {
     @GetMapping("/{id}")
     public Order getOrder(@PathVariable int id) {
         return this.orderService.getOrder(id);
-    }
-
-    @GetMapping("/token")
-    public List<Order> getOrders(@RequestHeader("Authorization") String token) {
-        int userId;
-        try {
-            userId = this.authService.getUserId(token);
-            return this.orderService.getByUserId(userId);
-        } catch (NullPointerException e) {
-            System.out.println("User does not have order history");
-            return new ArrayList<>();
-        }
     }
 
     @PostMapping
