@@ -32,6 +32,7 @@ public class CartController {
     @PostMapping
     public Cart insertCart(@RequestBody Cart cart) {
         this.cartService.insertCart(cart);
+        cart.setId(cartService.getNewestCartItem().getId());
         return cart;
     }
 
