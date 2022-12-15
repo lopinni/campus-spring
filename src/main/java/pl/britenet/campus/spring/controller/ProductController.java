@@ -39,13 +39,13 @@ public class ProductController {
         return product;
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Product updateProduct(@RequestBody Product product) {
         this.productService.updateProduct(product);
         return product;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public void deleteProduct(@PathVariable int id) {
         this.productService.deleteProduct(id);
     }

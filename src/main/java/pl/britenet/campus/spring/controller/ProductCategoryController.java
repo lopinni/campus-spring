@@ -24,28 +24,27 @@ public class ProductCategoryController {
     }
 
     @GetMapping("/{productId}/{categoryId}")
-    public ProductCategory getProductCategory(
-            @PathVariable int productId, @PathVariable int categoryId) {
+    public ProductCategory getProductCategory(@PathVariable int productId, @PathVariable int categoryId) {
         return this.productCategoryService.getProductCategory(productId, categoryId);
     }
 
     @PostMapping
-    public ProductCategory insertProductCategory(
-            @RequestBody ProductCategory productCategory) {
+    public ProductCategory insertProductCategory(@RequestBody ProductCategory productCategory) {
         this.productCategoryService.insertProductCategory(productCategory);
         return productCategory;
     }
 
-    @PutMapping("/{productId}/{categoryId}")
-    public ProductCategory updateProductCategory(
-            @RequestBody ProductCategory productCategory, @PathVariable int productId, @PathVariable int categoryId) {
+    @GetMapping("/update")
+    public ProductCategory updateProductCategory(@RequestBody ProductCategory productCategory,
+                                                 @RequestHeader("Product-Id") int productId,
+                                                 @RequestHeader("Category-Id") int categoryId) {
         this.productCategoryService.updateProductCategory(productId, categoryId, productCategory);
         return productCategory;
     }
 
-    @DeleteMapping("/{productId}/{categoryId}")
-    public void deleteProductCategory(
-            @PathVariable int productId, @PathVariable int categoryId) {
+    @GetMapping("/delete")
+    public void deleteProductCategory(@RequestHeader("Product-Id") int productId,
+                                      @RequestHeader("Category-Id") int categoryId) {
         this.productCategoryService.deleteProductCategory(productId, categoryId);
     }
 }

@@ -34,13 +34,13 @@ public class CategoryController {
         return category;
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Category updateCategory(@RequestBody Category category) {
         this.categoryService.updateCategory(category);
         return category;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public void deleteCategory(@PathVariable int id) {
         this.categoryService.deleteCategory(id);
     }

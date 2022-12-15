@@ -35,13 +35,13 @@ public class OrderController {
         return order;
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Order updateOrder(@RequestBody Order order) {
         this.orderService.updateOrder(order);
         return order;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public void deleteOrder(@PathVariable int id) {
         this.orderService.deleteOrder(id);
     }

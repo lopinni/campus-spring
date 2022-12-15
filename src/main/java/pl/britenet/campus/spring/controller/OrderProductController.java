@@ -28,8 +28,7 @@ public class OrderProductController {
     }
 
     @GetMapping("/{orderId}/{productId}")
-    public OrderProduct getOrderProduct(
-            @PathVariable int orderId, @PathVariable int productId) {
+    public OrderProduct getOrderProduct(@PathVariable int orderId, @PathVariable int productId) {
         return this.orderProductService.getOrderProduct(orderId, productId);
     }
 
@@ -46,22 +45,22 @@ public class OrderProductController {
     }
 
     @PostMapping
-    public OrderProduct insertOrderProduct(
-            @RequestBody OrderProduct orderProduct) {
+    public OrderProduct insertOrderProduct(@RequestBody OrderProduct orderProduct) {
         this.orderProductService.insertOrderProduct(orderProduct);
         return orderProduct;
     }
 
-    @PutMapping("/{orderId}/{productId}")
-    public OrderProduct updateOrderProduct(
-            @RequestBody OrderProduct OrderProduct, @PathVariable int orderId, @PathVariable int productId) {
+    @GetMapping("/update")
+    public OrderProduct updateOrderProduct(@RequestBody OrderProduct OrderProduct,
+                                           @RequestHeader("Order-Id") int orderId,
+                                           @RequestHeader("Product-Id") int productId) {
         this.orderProductService.updateOrderProduct(orderId, productId, OrderProduct);
         return OrderProduct;
     }
 
-    @DeleteMapping("/{orderId}/{productId}")
-    public void deleteOrderProduct(
-            @PathVariable int orderId, @PathVariable int productId) {
+    @GetMapping("/delete")
+    public void deleteOrderProduct(@RequestHeader("Order-Id") int orderId,
+                                   @RequestHeader("Product-Id") int productId) {
         this.orderProductService.deleteOrderProduct(orderId, productId);
     }
 }

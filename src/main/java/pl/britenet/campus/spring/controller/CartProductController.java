@@ -28,8 +28,7 @@ public class CartProductController {
     }
 
     @GetMapping("/{cartId}/{productId}")
-    public CartProduct getCartProduct(
-            @PathVariable int cartId, @PathVariable int productId) {
+    public CartProduct getCartProduct(@PathVariable int cartId, @PathVariable int productId) {
         return this.cartProductService.getCartProduct(cartId, productId);
     }
 
@@ -46,22 +45,22 @@ public class CartProductController {
     }
 
     @PostMapping
-    public CartProduct insertCartProduct(
-            @RequestBody CartProduct cartProduct) {
+    public CartProduct insertCartProduct(@RequestBody CartProduct cartProduct) {
         this.cartProductService.insertCartProduct(cartProduct);
         return cartProduct;
     }
 
-    @PutMapping("/{cartId}/{productId}")
-    public CartProduct updateCartProduct(
-            @RequestBody CartProduct CartProduct, @PathVariable int cartId, @PathVariable int productId) {
+    @GetMapping("/update")
+    public CartProduct updateCartProduct(@RequestBody CartProduct CartProduct,
+                                         @RequestHeader("Cart-Id") int cartId,
+                                         @RequestHeader("Product-Id") int productId) {
         this.cartProductService.updateCartProduct(cartId, productId, CartProduct);
         return CartProduct;
     }
 
-    @DeleteMapping("/{cartId}/{productId}")
-    public void deleteCartProduct(
-            @PathVariable int cartId, @PathVariable int productId) {
+    @GetMapping("/delete")
+    public void deleteCartProduct(@RequestHeader("Cart-Id") int cartId,
+                                  @RequestHeader("Product-Id") int productId) {
         this.cartProductService.deleteCartProduct(cartId, productId);
     }
 }

@@ -36,13 +36,13 @@ public class CartController {
         return cart;
     }
 
-    @PutMapping
+    @PostMapping("/update")
     public Cart updateCart(@RequestBody Cart cart) {
         this.cartService.updateCart(cart);
         return cart;
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public void deleteCart(@PathVariable int id) {
         this.cartService.deleteCart(id);
     }
