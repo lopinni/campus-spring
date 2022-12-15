@@ -12,6 +12,7 @@ import pl.britenet.campusapiapp.model.OrderProduct;
 import pl.britenet.campusapiapp.model.builder.OrderBuilder;
 import pl.britenet.campusapiapp.model.builder.OrderProductBuilder;
 import pl.britenet.campusapiapp.service.CartProductService;
+import pl.britenet.campusapiapp.service.CartService;
 import pl.britenet.campusapiapp.service.OrderProductService;
 import pl.britenet.campusapiapp.service.OrderService;
 
@@ -25,16 +26,19 @@ public class CartOrderController {
     private final OrderProductService orderProductService;
     private final AuthService authService;
     private final OrderService orderService;
+    private final CartService cartService;
 
     @Autowired
     public CartOrderController(CartProductService cartProductService,
                                OrderProductService orderProductService,
                                AuthService authService,
-                               OrderService orderService) {
+                               OrderService orderService,
+                               CartService cartService) {
         this.cartProductService = cartProductService;
         this.orderProductService = orderProductService;
         this.authService = authService;
         this.orderService = orderService;
+        this.cartService = cartService;
     }
 
     @PostMapping
@@ -65,6 +69,7 @@ public class CartOrderController {
                 );
                 cartProductService.deleteCartProduct(cartProduct.getCartId(), cartProduct.getProductId());
             }
+            cartService.deleteCartByUserId(this.authService.getUserId(token));
         } catch (NullPointerException e) {
             System.out.println("User has empty cart");
         }
