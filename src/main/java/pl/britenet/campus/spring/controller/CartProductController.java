@@ -34,10 +34,8 @@ public class CartProductController {
 
     @GetMapping("/token")
     public List<CartProduct> getCart(@RequestHeader("Authorization") String token) {
-        int userId;
         try {
-            userId = this.authService.getUserId(token);
-            return this.cartProductService.getByUserId(userId);
+            return this.cartProductService.getByUserId(this.authService.getUserId(token));
         } catch (NullPointerException e) {
             System.out.println("User has empty cart");
             return new ArrayList<>();

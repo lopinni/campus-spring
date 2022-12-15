@@ -34,10 +34,8 @@ public class OrderProductController {
 
     @GetMapping("/token")
     public List<OrderProduct> getOrders(@RequestHeader("Authorization") String token) {
-        int userId;
         try {
-            userId = this.authService.getUserId(token);
-            return this.orderProductService.getByUserId(userId);
+            return this.orderProductService.getByUserId(this.authService.getUserId(token));
         } catch (NullPointerException e) {
             System.out.println("User does not have order history");
             return new ArrayList<>();
