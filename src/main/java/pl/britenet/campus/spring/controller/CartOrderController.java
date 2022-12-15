@@ -55,6 +55,7 @@ public class CartOrderController {
                 Order newOrder = orderService.getNewestOrderItem();
                 orderProductService.insertOrderProduct(
                         new OrderProductBuilder(new OrderProduct())
+                                .setOrderId(newOrder.getId())
                                 .setProductId(cartProduct.getProduct().getId())
                                 .setQuantity(1)
                                 .setProductPrice(cartProduct.getProduct().getPrice())
