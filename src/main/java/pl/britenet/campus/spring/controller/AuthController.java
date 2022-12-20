@@ -32,6 +32,11 @@ public class AuthController {
         return this.authService.getUserId(token);
     }
 
+    @GetMapping("/username")
+    public String getUserName(@RequestHeader("Authorization") String token) {
+        return this.authService.getUserName(token);
+    }
+
     @PostMapping("/register")
     public void register(@RequestBody Credentials credentials) {
         this.authService.register(credentials);

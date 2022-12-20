@@ -63,6 +63,10 @@ public class AuthService {
         return activeTokenMap.get(token);
     }
 
+    public String getUserName(String token) {
+        return userService.getUser(activeTokenMap.get(token)).getLogin();
+    }
+
     public String hashMD5(String password) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         messageDigest.update(password.getBytes());
