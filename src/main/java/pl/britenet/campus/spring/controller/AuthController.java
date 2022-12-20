@@ -34,7 +34,13 @@ public class AuthController {
 
     @GetMapping("/username")
     public String getUserName(@RequestHeader("Authorization") String token) {
-        return this.authService.getUserName(token);
+        String userNameJSON = "";
+        try {
+            userNameJSON = "{ \"name\": \""+ this.authService.getUserName(token) + "\" }";
+        } catch (Exception e) {
+            System.out.println("User does not exist");
+        }
+        return userNameJSON;
     }
 
     @PostMapping("/register")
