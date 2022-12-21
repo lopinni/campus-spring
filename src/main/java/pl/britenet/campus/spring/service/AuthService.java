@@ -1,6 +1,7 @@
 package pl.britenet.campus.spring.service;
 
 import jakarta.xml.bind.DatatypeConverter;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import pl.britenet.campus.spring.model.Credentials;
 import pl.britenet.campus.spring.model.LoginResponse;
@@ -26,7 +27,7 @@ public class AuthService {
         this.userService = userService;
     }
 
-    public LoginResponse login(Credentials credentials) {
+    public LoginResponse login(@NotNull Credentials credentials) {
         Optional<User> user;
         String token = UUID.randomUUID().toString();
         try {
@@ -48,7 +49,7 @@ public class AuthService {
         return this.activeTokenMap.containsKey(token);
     }
 
-    public void register(Credentials credentials, String name, String surname) {
+    public void register(@NotNull Credentials credentials, String name, String surname) {
         try {
             userService.insertUser(new UserBuilder(new User())
                             .setLogin(credentials.getUsername())
@@ -71,7 +72,7 @@ public class AuthService {
         return name + " " + surname;
     }
 
-    public String hashMD5(String password) throws NoSuchAlgorithmException {
+    public String hashMD5(@NotNull String password) throws NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         messageDigest.update(password.getBytes());
         return DatatypeConverter.printHexBinary(messageDigest.digest()).toUpperCase();
