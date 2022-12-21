@@ -33,10 +33,10 @@ public class AuthController {
     }
 
     @GetMapping("/username")
-    public String getUserName(@RequestHeader("Authorization") String token) {
+    public String getUserFullName(@RequestHeader("Authorization") String token) {
         String userNameJSON = "";
         try {
-            userNameJSON = "{ \"name\": \""+ this.authService.getUserName(token) + "\" }";
+            userNameJSON = "{ \"name\": \""+ this.authService.getUserFullName(token) + "\" }";
         } catch (NullPointerException e) {
             System.out.println("User does not exist");
         }
