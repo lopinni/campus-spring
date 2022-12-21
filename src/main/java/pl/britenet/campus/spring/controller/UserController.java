@@ -7,7 +7,6 @@ import pl.britenet.campusapiapp.model.User;
 import pl.britenet.campusapiapp.model.builder.UserBuilder;
 import pl.britenet.campusapiapp.service.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,6 +30,17 @@ public class UserController {
     @GetMapping("/{id}")
     public User getUser(@PathVariable int id) {
         return this.userService.getUser(id);
+    }
+
+    @GetMapping("/address/")
+    public User getShippingAddress(@RequestHeader("Authorization") String token) {
+        User existingUser = this.userService.getUser(this.authService.getUserId(token));
+        return new UserBuilder(new User())
+                .setCity(existingUser.getCity())
+                .setStreet(existingUser.getStreet())
+                .setCountry(existingUser.getCountry())
+                .setZipCode(existingUser.getZipCode())
+                .getUser();
     }
 
     @PostMapping
