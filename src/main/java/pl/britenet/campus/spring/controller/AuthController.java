@@ -37,7 +37,7 @@ public class AuthController {
         String userNameJSON = "";
         try {
             userNameJSON = "{ \"name\": \""+ this.authService.getUserName(token) + "\" }";
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             System.out.println("User does not exist");
         }
         return userNameJSON;
