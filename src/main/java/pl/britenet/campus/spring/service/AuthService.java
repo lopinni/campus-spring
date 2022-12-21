@@ -48,12 +48,14 @@ public class AuthService {
         return this.activeTokenMap.containsKey(token);
     }
 
-    public void register(Credentials credentials) {
+    public void register(Credentials credentials, String name, String surname) {
         try {
             userService.insertUser(new UserBuilder(new User())
-                    .setLogin(credentials.getUsername())
-                    .setPassword(hashMD5(credentials.getPassword()))
-                    .getUser());
+                            .setLogin(credentials.getUsername())
+                            .setPassword(hashMD5(credentials.getPassword()))
+                            .setName(name)
+                            .setSurname(surname)
+                            .getUser());
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Password hash failed");
         }

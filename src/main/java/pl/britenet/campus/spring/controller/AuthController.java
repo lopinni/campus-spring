@@ -44,7 +44,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody Credentials credentials) {
-        this.authService.register(credentials);
+    public void register(@RequestBody Credentials credentials,
+                         @RequestHeader("Name") String name,
+                         @RequestHeader("Surname") String surname) {
+        this.authService.register(credentials, name, surname);
     }
 }
