@@ -25,7 +25,7 @@ public class ProductController {
 
     @GetMapping()
     public List<List<Product>> getAllPaginated() {
-        return this.productService.getPaginated(999);
+        return this.productService.getPaginated(6);
     }
 
     @GetMapping("/category/{id}")
