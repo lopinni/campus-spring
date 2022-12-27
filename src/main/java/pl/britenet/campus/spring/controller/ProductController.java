@@ -18,9 +18,14 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(value={"", "/name/"})
+    @GetMapping("/name/")
     public List<Product> getAll() {
         return this.productService.getAll();
+    }
+
+    @GetMapping()
+    public List<List<Product>> getAllPaginated() {
+        return this.productService.getPaginated(999);
     }
 
     @GetMapping("/category/{id}")
