@@ -23,9 +23,9 @@ public class ProductController {
         return this.productService.getAll();
     }
 
-    @GetMapping()
-    public List<List<Product>> getAllPaginated() {
-        return this.productService.getPaginated(6);
+    @GetMapping("/{pagenum}")
+    public List<List<Product>> getAllPaginated(@PathVariable int pagenum) {
+        return this.productService.getPaginated(pagenum);
     }
 
     @GetMapping("/category/{id}")
@@ -38,7 +38,7 @@ public class ProductController {
         return this.productService.getByName(name);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Product getProduct(@PathVariable int id) {
         return this.productService.getProduct(id);
     }
